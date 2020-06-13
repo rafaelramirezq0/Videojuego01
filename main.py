@@ -33,9 +33,9 @@ player_rect = pygame.Rect(200,399,36,57)
 test_rect = pygame.Rect(200,399,100,50)
 
 # Status NIVELES/PANTALLA
-title_screen1 = True
+title_screen1 = False
 title_screen2 = False
-level1_forest = False
+level1_forest = True
 level2_desert = False
 level3_castle = False
 
@@ -998,7 +998,7 @@ freim464 = pygame.transform.scale(freim464, (800, 600))
 freim465 = pygame.transform.scale(freim465, (800, 600))
 freim466 = pygame.transform.scale(freim466, (800, 600))
 freim467 = pygame.transform.scale(freim467, (800, 600))
-
+#moviepy
 
 def animation_intro1():
     screen.blit(freim1, [0, 0])
@@ -2507,17 +2507,40 @@ while title_screen2 == True:
 move_right = False
 move_left = False
 jump = False
+
+
+player_rect.x = player_location[0]
+player_rect.y = player_location[1]
+
 # JUEGO - Level1
 while level1_forest == True:
     pygame.mixer.music.stop()   
     screen.blit(background_forest0, [0, 0])
 
+    for evento in pygame.event.get():
+        if evento.type == QUIT:
+            pygame.quit()
+            sys.exit()
 
-    player_movement = [0,0]
+        # Teclas presionadas
+        if evento.type == KEYDOWN:
+            if evento.key == K_RIGHT:
+                move_right = True
+            if evento.key == K_LEFT:
+                move_left = True
+            if evento.key == True:
+                vertical_momentum = -5
+        if evento.type == KEYUP:
+            if evento.key == K_RIGHT:
+                move_right = False
+            if evento.key == K_LEFT:
+                move_left = False
+
+    
     if move_right == True:
-        player_movement[0] += 8
+        player_rect.x += 8
     if move_left == True:
-        player_movement[0] -=8
+        player_rect.x -= 8
     if vertical_momentum > 3:
         vertical_momentum = 3
 
@@ -2537,37 +2560,18 @@ while level1_forest == True:
     '''   
 
     # Rect + collision test
-    player_rect.x = player_location[0]
-    player_rect.y = player_location[1]
+
     if player_rect.colliderect(test_rect):
         pygame.draw.rect(screen,(255,0,0),test_rect)
     else:
         pygame.draw.rect(screen,(0,0,0),test_rect)
     # Más rect
-    display.blit(player,player_rect.x,player_rect.y)
+    screen.blit(player,[player_rect.x,player_rect.y])
 
 
 
 
     pygame.display.update()
-    for evento in pygame.event.get():
-        if evento.type == QUIT:
-            pygame.quit()
-            sys.exit()
-
-        # Teclas presionadas
-        if evento.type == KEYDOWN:
-            if evento.key == K_RIGHT:
-                move_right = True
-            if evento.key == K_LEFT:
-                move_left = True
-            if evento.key == True:
-                vertical_momentum = -5
-        if evento.type == KEYUP:
-            if evento.key == K_RIGHT:
-                move_right = False
-            if evento.key == K_LEFT:
-                move_left = False
                             
 
     #pygame.display.update( )

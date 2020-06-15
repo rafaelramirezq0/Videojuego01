@@ -16,13 +16,13 @@ pygame.mixer.init()
 # Random Stuff
 resolution = (800,600)
 screen = pygame.display.set_mode((resolution))
-pygame.display.set_caption("Minute War: Dark Melody")
+pygame.display.set_caption("Minuet War: Dark Melody")
 pygame.display.set_icon(pygame.image.load("icon.png"))
-clock_tick_rate=60
+clock_tick_rate=30
 clock = pygame.time.Clock()
 
 # Sounds (songs/effects)
-pygame.mixer.music.load("intro.mp3")
+pygame.mixer.music.load("Audio/intro.mp3")
 pygame.mixer.music.play(0)
 
 # Player Data
@@ -53,8 +53,7 @@ background_desert1 = pygame.image.load("Background/03desert/screen/desert_final.
 background_desert2 = pygame.image.load("Background/03desert/screen/desert_boss.png")
 
 
-
-# Novel 3 - Data
+# NIVEL 3 - Data
 
 
 
@@ -1520,11 +1519,6 @@ while title_screen1 == True:
     pygame.display.flip()
     clock.tick(clock_tick_rate)
 
-
-
-
-
-
 # JUEGO - TITLE SCREEN2
 while title_screen2 == True:
     
@@ -1552,14 +1546,18 @@ while title_screen2 == True:
     clock.tick(clock_tick_rate)
 
 
+
+
 # PLATER MOVEMENT STATUS
 move_right = False
 move_left = False
 jump = False
 
-
 player_rect.x = player_location[0]
 player_rect.y = player_location[1]
+
+
+
 
 # JUEGO - Level1
 while level1_forest == True:
@@ -1593,8 +1591,6 @@ while level1_forest == True:
     if vertical_momentum > 3:
         vertical_momentum = 3
 
-
-
     '''
         if player_location[1] > resolution[1]-player.get_height():
             player_y_momentum = -player_y_momentum
@@ -1609,7 +1605,6 @@ while level1_forest == True:
     '''   
 
     # Rect + collision test
-
     if player_rect.colliderect(test_rect):
         pygame.draw.rect(screen,(255,0,0),test_rect)
     else:
@@ -1619,10 +1614,6 @@ while level1_forest == True:
 
 
 
-
     pygame.display.update()
-                            
-
-    #pygame.display.update( )
     pygame.display.flip()
     clock.tick(clock_tick_rate)
